@@ -1,0 +1,55 @@
+﻿@using MVCdeneme2.Models.EntityFramework
+@model IEnumerable<MVCdeneme2.Models.EntityFramework.Ogrenci>
+@{
+    ViewBag.Title = "TekSinif";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    OkulDbEntities db = new OkulDbEntities();
+}
+
+<h2>
+    @Model.FirstOrDefault().Sinif.Ad Sınıfı Not Listesi
+</h2>
+<table class="table table-striped table-bordered" id="tblTekDers" style="width:100%">
+    <thead>
+        <tr>
+            <th>Öğrenci ismi</th>
+            @foreach (var item in db.Ders)
+            {
+                <td>@item.Ad</td>
+            }
+            <td>Ortalama</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.Ad @item.Soyad</td>
+                @foreach (var ders in db.Ders)
+                {
+                    var res = db.OgrenciDers.Find(item.Id, ders.Id);
+                    if (res != null)
+                    {
+                        <td>@res.SonNot</td>
+                    }
+
+                    else
+                    {
+                        <td>Not henüz girilmedi</td>
+                    }
+
+                }
+                @if (item.GenelOrt != null)
+                {
+                    <td>@item.GenelOrt</td>
+                }
+
+                else
+                {
+                    <td>Henüz hiç not girilmedi</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

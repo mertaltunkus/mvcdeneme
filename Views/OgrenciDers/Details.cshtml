@@ -1,0 +1,59 @@
+﻿@model MVCdeneme2.Models.EntityFramework.OgrenciDers
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OgrenciDers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Final)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Final)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SonNot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SonNot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ders.Ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ders.Ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ogrenci.Ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ogrenci.Ad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

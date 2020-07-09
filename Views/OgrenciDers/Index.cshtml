@@ -1,0 +1,56 @@
+﻿@model MVCdeneme2.Models.EntityFramework.OgrenciDers
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Notlandırma Sistemi</h2>
+
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@TempData["Message"]");
+            };
+    </script>
+
+}
+<p>
+    @Html.ActionLink("Yeni Not Gir", "Create", null, new { @class = "btn btn-success" })
+</p>
+<p> Ya da </p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OgrenciId, "Öğrenci İsmi", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("OgrenciId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.OgrenciId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DersId, "Ders", htmlAttributes: new { @class = "control-label col-md-2", id = "dd", onchange = "removeDropItems()" })
+        <div class="col-md-10">
+            @Html.DropDownList("DersId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DersId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Notları Güncelle" class="btn btn-success" />
+        </div>
+    </div>
+}
+<p>
+    Ya da
+</p>
+<p>
+    @Html.ActionLink("Yeni Döneme Başla", "YeniDonem", null, new { @class = "btn btn-danger" ,onclick = "return confirm('Bu islemi gerceklestirmek butun notları silecektir, devam etmek istiyor musunuz?');" })
+</p>
+
+

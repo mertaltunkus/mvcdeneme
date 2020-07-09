@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MVCdeneme2.Models.EntityFramework.Ogrenci>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Öğrenci Listesi</h2>
+
+<p>
+    @Html.ActionLink("Yeni Öğrenci Oluştur", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table table-bordered" id="tbl">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Soyad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DogumTarihi)
+            </th>
+            <th>
+                Yaş
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cinsiyet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GenelOrt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sinif.Ad)
+            </th>
+            <th>
+                İşlemler
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Soyad)
+                </td>
+                <td>
+                    @(item.DogumTarihi.Value.ToString("dd-MM-yyyy"))
+                </td>
+                <td>
+                    @(DateTime.Today.Year-item.DogumTarihi.Value.Year)
+                </td>
+                <td>
+                    @(item.Cinsiyet==true?"Erkek":"Kadın")
+                </td>
+                <td>
+                    @(item.GenelOrt==null?"Not henüz açıklanmadı": Html.DisplayFor(modelItem => item.GenelOrt).ToString())
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sinif.Ad)
+                </td>
+                <td>
+                    @Html.ActionLink("Güncelle", "Edit", new { id = item.Id }) |
+                    <a class="btn btn-danger btnOgrenciSil" data-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*@Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { onclick = "return confirm('" + item.Ad.ToString() + ' ' + item.Soyad.ToString() + " isimli öğrenciyi silmek istediğinize emin misiniz?');" })*@

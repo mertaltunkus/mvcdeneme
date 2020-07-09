@@ -1,0 +1,33 @@
+﻿@using MVCdeneme2.Models.EntityFramework
+@model IEnumerable<MVCdeneme2.Models.EntityFramework.OgrenciDers>
+@{
+    ViewBag.Title = "Tekders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>
+    @ViewBag.DersAdi Not Listesi
+</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Öğrenci ismi</th>
+            <th>Son Not</th>
+            <td>Vize</td>
+            <td>Final</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ogrenci.Ad @item.Ogrenci.Soyad</td>
+                <td>@item.SonNot</td>
+                <td>@item.Vize</td>
+                <td>@item.Final</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
